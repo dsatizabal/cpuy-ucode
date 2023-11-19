@@ -1,0 +1,83 @@
+import cocotb
+from cocotb.clock import Clock
+from cocotb.triggers import ClockCycles, Timer
+from .result import Result
+
+# PORT Mov to W
+obj64 = Result(64, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+obj65 = Result(65, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1) 
+
+# W Mov to PORT
+obj72 = Result(72, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+obj73 = Result(73, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+
+# Mov WR
+obj80 = Result(80, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
+obj81 = Result(81, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
+obj82 = Result(82, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
+obj83 = Result(83, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
+obj84 = Result(84, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
+obj85 = Result(85, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
+obj86 = Result(86, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
+obj87 = Result(87, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
+
+# Mov RW
+obj88 = Result(88, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+obj89 = Result(89, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+obj90 = Result(90, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+obj91 = Result(91, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+obj92 = Result(92, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+obj93 = Result(93, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+obj94 = Result(94, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+obj95 = Result(95, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+
+# SetbW
+obj96 = Result(96, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj97 = Result(97, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj98 = Result(98, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj99 = Result(99, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj100 = Result(100, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj101 = Result(101, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj102 = Result(102, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj103 = Result(103, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+
+# ClrbW
+obj104 = Result(104, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj105 = Result(105, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj106 = Result(106, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj107 = Result(107, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj108 = Result(108, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj109 = Result(109, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj110 = Result(110, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj111 = Result(111, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+
+cases = [obj64, obj65, obj72, obj73, obj80, obj81, obj82, obj83, obj84, obj85, obj86, obj87, obj88, obj89, 
+         obj90, obj91, obj92, obj93, obj94, obj95, obj96, obj97, obj98, obj99, obj100, obj101, obj102, obj103,
+         obj104, obj105, obj106, obj107, obj108, obj109, obj110, obj111]
+
+@cocotb.test()
+async def ucode_test(dut):
+    clock = Clock(dut.clk_tb, 10, "us")
+    cocotb.fork(clock.start())
+
+    await ClockCycles(dut.clk_tb, 2)
+
+    for case in cases:
+        dut.opcode_tb.value = case.opcode
+        dut.w_tb.value = case.w
+        dut.carry_tb.value = case.carry
+        dut.zero_tb.value = case.zero
+
+        await ClockCycles(dut.clk_tb, 2)
+        await Timer(10, units="ns");
+
+        assert dut.alu_operation_tb.value == case.alu_operation, f"Unexpected alu_operation for opcode {dut.opcode_tb.value}";  
+        assert dut.alu_multibyte_result_tb.value == case.alu_multibyte_result, f"Unexpected alu_multibyte_result for opcode {dut.opcode_tb.value}";  
+        assert dut.jump_operation_tb.value == case.jump_operation, f"Unexpected jump_operation for opcode {dut.opcode_tb.value}";  
+        assert dut.jump_condition_tb.value == case.jump_condition, f"Unexpected jump_condition for opcode {dut.opcode_tb.value}";  
+        assert dut.mov_operation_tb.value == case.mov_operation, f"Unexpected mov_operation for opcode {dut.opcode_tb.value}";  
+        assert dut.destination_w_tb.value == case.destination_w, f"Unexpected destination_w for opcode {dut.opcode_tb.value}";  
+        assert dut.destination_flags_tb.value == case.destination_flags, f"Unexpected destination_flags for opcode {dut.opcode_tb.value}";  
+        assert dut.destination_memory_tb.value == case.destination_memory, f"Unexpected destination_memory for opcode {dut.opcode_tb.value}";  
+        assert dut.destination_registers_tb.value == case.destination_registers, f"Unexpected destination_registers for opcode {dut.opcode_tb.value}";  
+        assert dut.destination_ports_tb.value == case.destination_ports, f"Unexpected destination_ports for opcode {dut.opcode_tb.value}";  

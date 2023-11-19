@@ -9,33 +9,39 @@ that can be driven / tested by the cocotb test.py
 module tb (
     // testbench is controlled by test/test_*.py files
     input wire clk_tb,
-    input wire rst_tb,
-    input wire enable_tb,
-    input wire [7:0] operation_tb,
-    input wire [7:0] op1_tb,
-    input wire [7:0] op2_tb,
-	input wire cpu_carry_tb,
-    output reg [7:0] result_l_tb,
-    output reg [7:0] result_h_tb,
-    output wire carry_tb,
-    output wire zero_tb,
-    output wire sign_tb
+    input wire [7:0] opcode_tb,
+    input wire [7:0] w_tb,
+    input wire carry_tb,
+    input wire zero_tb,
+    output wire alu_operation_tb,
+    output wire alu_multibyte_result_tb,
+    output wire jump_operation_tb,
+    output wire jump_condition_tb,
+    output wire mov_operation_tb,
+    output wire destination_w_tb,
+    output wire destination_flags_tb,
+    output wire destination_memory_tb,
+    output wire destination_registers_tb,
+    output wire destination_ports_tb
 );
 
     // instantiate the DUT
-    alu alu(
+    ucode ucode(
         .clk (clk_tb),
-        .rst (rst_tb),
-        .enable (enable_tb),
-        .operation (operation_tb),
-        .op1 (op1_tb),
-        .op2 (op2_tb),
-        .cpu_carry (cpu_carry_tb),
-        .result_l (result_l_tb),
-        .result_h (result_h_tb),
+        .opcode (opcode_tb),
+        .w (w_tb),
         .carry (carry_tb),
         .zero (zero_tb),
-        .sign (sign_tb)
+        .alu_operation (alu_operation_tb),
+        .alu_multibyte_result (alu_multibyte_result_tb),
+        .jump_operation (jump_operation_tb),
+        .jump_condition (jump_condition_tb),
+        .mov_operation (mov_operation_tb),
+        .destination_w (destination_w_tb),
+        .destination_flags (destination_flags_tb),
+        .destination_memory (destination_memory_tb),
+        .destination_registers (destination_registers_tb),
+        .destination_ports (destination_ports_tb)
     );
 
 endmodule

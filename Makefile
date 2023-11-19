@@ -1,5 +1,5 @@
 # cocotb setup
-MODULE = test.test_alu_ucode
+MODULE = test.test_ucode_basics, test.test_ucode_no_ops, test.test_ucode_with_ops
 export MODULE
 TOPLEVEL = tb
 VERILOG_SOURCES = tb.v

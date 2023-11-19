@@ -1,0 +1,38 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Sun Nov 19 20:12:18 2023
+[*]
+[dumpfile] "/home/dsatizabal/cpuy-ucode/ucode.vcd"
+[dumpfile_mtime] "Sun Nov 19 20:07:31 2023"
+[dumpfile_size] 14437
+[savefile] "/home/dsatizabal/cpuy-ucode/ucode.gtkw"
+[timestart] 0
+[size] 1920 1033
+[pos] -41 -41
+*-18.409319 400000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb.
+[sst_width] 276
+[signals_width] 222
+[sst_expanded] 1
+[sst_vpaned_height] 309
+@28
+tb.clk_tb
+@22
+tb.opcode_tb[7:0]
+tb.w_tb[7:0]
+@28
+tb.carry_tb
+tb.zero_tb
+tb.alu_operation_tb
+tb.alu_multibyte_result_tb
+tb.jump_operation_tb
+tb.jump_condition_tb
+tb.mov_operation_tb
+tb.destination_w_tb
+tb.destination_flags_tb
+tb.destination_memory_tb
+tb.destination_registers_tb
+@29
+tb.destination_ports_tb
+[pattern_trace] 1
+[pattern_trace] 0
