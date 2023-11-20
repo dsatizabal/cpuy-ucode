@@ -19,7 +19,9 @@ module ucode (
     output wire destination_ports,
     output reg [2:0] destination_index,
     output wire ram_operand,
-    output wire duplicate_w
+    output wire duplicate_w,
+    output wire source_ports,
+    output wire source_registers
 );
 
 	reg alu_op;
@@ -35,6 +37,8 @@ module ucode (
     reg [2:0] dst_index;
     reg ram_op;
     reg dup_w;
+    reg src_port;
+    reg src_reg;
 
     assign alu_operation = alu_op;
     assign alu_multibyte_result = alu_mb;
@@ -49,6 +53,8 @@ module ucode (
 	assign destination_index = dst_index;
 	assign ram_operand = ram_op;
 	assign duplicate_w = dup_w;
+    assign source_ports = src_port;
+    assign source_registers = src_reg;
 
 	always @(posedge clk) begin
 		alu_op <= 0;
@@ -64,6 +70,8 @@ module ucode (
 		dst_index <= 0;
 		ram_op <= 0;
     	dup_w <= 0;
+    	src_port <= 0;
+    	src_reg <= 0;
 
 		case (opcode)
 			// Instructions without operands
@@ -242,12 +250,13 @@ module ucode (
 			8'b0100_1000: begin // MovP0W
 				mov_op <= 1;
 				dst_w <= 1;
+				src_port <= 1;
 				dst_index <= opcode[2:0];
-
 			end
 			8'b0100_1001: begin // MovP1W
 				mov_op <= 1;
 				dst_w <= 1;
+				src_port <= 1;
 				dst_index <= opcode[2:0];
 			end
 			8'b0100_1010: begin
@@ -307,41 +316,49 @@ module ucode (
 			8'b0101_1000: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				src_reg <= 1;
 				dst_index <= opcode[2:0];
 			end
 			8'b0101_1001: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				src_reg <= 1;
 				dst_index <= opcode[2:0];
 			end
 			8'b0101_1010: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				src_reg <= 1;
 				dst_index <= opcode[2:0];
 			end
 			8'b0101_1011: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				src_reg <= 1;
 				dst_index <= opcode[2:0];
 			end
 			8'b0101_1100: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				src_reg <= 1;
 				dst_index <= opcode[2:0];
 			end
 			8'b0101_1101: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				src_reg <= 1;
 				dst_index <= opcode[2:0];
 			end
 			8'b0101_1110: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				src_reg <= 1;
 				dst_index <= opcode[2:0];
 			end
 			8'b0101_1111: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				src_reg <= 1;
 				dst_index <= opcode[2:0];
 			end
 
