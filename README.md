@@ -19,6 +19,9 @@ Implements the microcode that can be used for a CPU implementation, intended to 
 - **destination_memory**: Indicates if destination of operation goes to memory
 - **destination_registers**:  Indicates if destination of operation goes to General Purpose registers
 - **destination_ports**:  Indicates if destination of operation goes to ports
+- **destination_index**: Indicates the index of the destination element that can be Port or Register
+- **ram_operand**:  Indicates if one of the operands must be fetched from RAM first
+- **duplicate_w**:  Indicates if work register must be saved becuase it will be overwritter (swap)
 
 ## Operation:
 
