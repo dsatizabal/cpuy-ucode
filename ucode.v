@@ -16,7 +16,10 @@ module ucode (
     output wire destination_flags,
     output wire destination_memory,
     output wire destination_registers,
-    output wire destination_ports
+    output wire destination_ports,
+    output reg [2:0] destination_index,
+    output wire ram_operand,
+    output wire duplicate_w
 );
 
 	reg alu_op;
@@ -29,6 +32,9 @@ module ucode (
     reg dst_memory;
     reg dst_reg;
     reg dst_por;
+    reg [2:0] dst_index;
+    reg ram_op;
+    reg dup_w;
 
     assign alu_operation = alu_op;
     assign alu_multibyte_result = alu_mb;
@@ -40,6 +46,9 @@ module ucode (
     assign destination_memory = dst_memory;
     assign destination_registers = dst_reg;
     assign destination_ports = dst_por;
+	assign destination_index = dst_index;
+	assign ram_operand = ram_op;
+	assign duplicate_w = dup_w;
 
 	always @(posedge clk) begin
 		alu_op <= 0;
@@ -52,6 +61,9 @@ module ucode (
 		dst_memory <= 0;
 		dst_reg <= 0;
 		dst_por <= 0;
+		dst_index <= 0;
+		ram_op <= 0;
+    	dup_w <= 0;
 
 		case (opcode)
 			// Instructions without operands
@@ -207,10 +219,12 @@ module ucode (
 			8'b0100_0000: begin // MovWP0
 				mov_op <= 1;
 				dst_por <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0100_0001: begin // MovWP1
 				mov_op <= 1;
 				dst_por <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0100_0010: begin
 			end
@@ -228,10 +242,13 @@ module ucode (
 			8'b0100_1000: begin // MovP0W
 				mov_op <= 1;
 				dst_w <= 1;
+				dst_index <= opcode[2:0];
+
 			end
 			8'b0100_1001: begin // MovP1W
 				mov_op <= 1;
 				dst_w <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0100_1010: begin
 			end
@@ -249,67 +266,83 @@ module ucode (
 			8'b0101_0000: begin // MovWR0
 				mov_op <= 1;
 				dst_reg <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_0001: begin // MovWR1
 				mov_op <= 1;
 				dst_reg <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_0010: begin // MovWR2
 				mov_op <= 1;
 				dst_reg <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_0011: begin // MovWR3
 				mov_op <= 1;
 				dst_reg <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_0100: begin // MovWR4
 				mov_op <= 1;
 				dst_reg <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_0101: begin // MovWR5
 				mov_op <= 1;
 				dst_reg <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_0110: begin // MovWR6
 				mov_op <= 1;
 				dst_reg <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_0111: begin // MovWR7
 				mov_op <= 1;
 				dst_reg <= 1;
+				dst_index <= opcode[2:0];
 			end
 
 			8'b0101_1000: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_1001: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_1010: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_1011: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_1100: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_1101: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_1110: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				dst_index <= opcode[2:0];
 			end
 			8'b0101_1111: begin // MovR0W
 				mov_op <= 1;
 				dst_w <= 1;
+				dst_index <= opcode[2:0];
 			end
 
 			8'b0110_0000: begin // SetbW 0
@@ -415,10 +448,12 @@ module ucode (
 			8'b1000_0000: begin // MovMW
 				mov_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1000_0001: begin // MovMW
 				mov_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1000_0010: begin // MovWM
 				mov_op <= 1;
@@ -455,10 +490,12 @@ module ucode (
 			8'b1000_1010: begin // AddMW
 				alu_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1000_1011: begin // AddMW
 				alu_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1000_1100: begin // SubLW
 				alu_op <= 1;
@@ -471,10 +508,12 @@ module ucode (
 			8'b1000_1110: begin // SubMW
 				alu_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1000_1111: begin // SubMW
 				alu_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1001_0000: begin // MulLW
 				alu_op <= 1;
@@ -493,12 +532,14 @@ module ucode (
 				dst_w <= 1;
 				alu_mb <= 1;
 				dst_memory <= 1;
+				ram_op <= 1;
 			end
 			8'b1001_0011: begin // MulMW
 				alu_op <= 1;
 				dst_w <= 1;
 				alu_mb <= 1;
 				dst_memory <= 1;
+				ram_op <= 1;
 			end
 			8'b1001_0100: begin // AndLW
 				alu_op <= 1;
@@ -511,10 +552,12 @@ module ucode (
 			8'b1001_0110: begin // AndMW
 				alu_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1001_0111: begin // AndMW
 				alu_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1001_1000: begin // OrLW
 				alu_op <= 1;
@@ -527,10 +570,12 @@ module ucode (
 			8'b1001_1010: begin // OrMW
 				alu_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1001_1011: begin // OrMW
 				alu_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1001_1100: begin // XorLW
 				alu_op <= 1;
@@ -543,20 +588,24 @@ module ucode (
 			8'b1001_1110: begin // XorMW
 				alu_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1001_1111: begin // XorMW
 				alu_op <= 1;
 				dst_w <= 1;
+				ram_op <= 1;
 			end
 			8'b1010_0000: begin // XchWM
 				mov_op <= 1;
 				dst_w <= 1;
 				dst_memory <= 1;
+				dup_w <= 1;
 			end
 			8'b1010_0001: begin // XchWM
 				mov_op <= 1;
 				dst_w <= 1;
 				dst_memory <= 1;
+				dup_w <= 1;
 			end
 			8'b1010_0010: begin // Jmp
 				jmp_op <= 1;

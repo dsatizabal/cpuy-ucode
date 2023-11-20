@@ -22,7 +22,10 @@ module tb (
     output wire destination_flags_tb,
     output wire destination_memory_tb,
     output wire destination_registers_tb,
-    output wire destination_ports_tb
+    output wire destination_ports_tb,
+    output reg [2:0] destination_index_tb,
+    output wire ram_operand_tb,
+    output wire duplicate_w_tb
 );
 
     // instantiate the DUT
@@ -41,7 +44,10 @@ module tb (
         .destination_flags (destination_flags_tb),
         .destination_memory (destination_memory_tb),
         .destination_registers (destination_registers_tb),
-        .destination_ports (destination_ports_tb)
+        .destination_ports (destination_ports_tb),
+        .destination_index (destination_index_tb),
+        .ram_operand (ram_operand_tb),
+        .duplicate_w (duplicate_w_tb)
     );
 
 endmodule

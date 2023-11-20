@@ -4,52 +4,52 @@ from cocotb.triggers import ClockCycles, Timer
 from .result import Result
 
 # PORT Mov to W
-obj64 = Result(64, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-obj65 = Result(65, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1) 
+obj64 = Result(64, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+obj65 = Result(65, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0) 
 
 # W Mov to PORT
-obj72 = Result(72, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
-obj73 = Result(73, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+obj72 = Result(72, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0)
+obj73 = Result(73, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0)
 
 # Mov WR
-obj80 = Result(80, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
-obj81 = Result(81, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
-obj82 = Result(82, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
-obj83 = Result(83, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
-obj84 = Result(84, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
-obj85 = Result(85, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
-obj86 = Result(86, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
-obj87 = Result(87, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0)
+obj80 = Result(80, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+obj81 = Result(81, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0)
+obj82 = Result(82, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0, 0)
+obj83 = Result(83, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0, 0)
+obj84 = Result(84, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0, 0)
+obj85 = Result(85, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0, 0)
+obj86 = Result(86, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0, 0)
+obj87 = Result(87, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0, 0)
 
 # Mov RW
-obj88 = Result(88, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
-obj89 = Result(89, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
-obj90 = Result(90, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
-obj91 = Result(91, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
-obj92 = Result(92, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
-obj93 = Result(93, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
-obj94 = Result(94, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
-obj95 = Result(95, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+obj88 = Result(88, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0)
+obj89 = Result(89, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0)
+obj90 = Result(90, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0, 0)
+obj91 = Result(91, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 3, 0, 0)
+obj92 = Result(92, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 4, 0, 0)
+obj93 = Result(93, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 5, 0, 0)
+obj94 = Result(94, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 6, 0, 0)
+obj95 = Result(95, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 7, 0, 0)
 
 # SetbW
-obj96 = Result(96, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj97 = Result(97, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj98 = Result(98, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj99 = Result(99, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj100 = Result(100, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj101 = Result(101, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj102 = Result(102, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj103 = Result(103, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj96 = Result(96, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj97 = Result(97, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj98 = Result(98, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj99 = Result(99, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj100 = Result(100, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj101 = Result(101, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj102 = Result(102, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj103 = Result(103, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 
 # ClrbW
-obj104 = Result(104, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj105 = Result(105, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj106 = Result(106, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj107 = Result(107, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj108 = Result(108, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj109 = Result(109, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj110 = Result(110, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-obj111 = Result(111, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+obj104 = Result(104, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj105 = Result(105, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj106 = Result(106, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj107 = Result(107, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj108 = Result(108, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj109 = Result(109, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj110 = Result(110, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+obj111 = Result(111, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 
 cases = [obj64, obj65, obj72, obj73, obj80, obj81, obj82, obj83, obj84, obj85, obj86, obj87, obj88, obj89, 
          obj90, obj91, obj92, obj93, obj94, obj95, obj96, obj97, obj98, obj99, obj100, obj101, obj102, obj103,
@@ -81,3 +81,7 @@ async def ucode_test(dut):
         assert dut.destination_memory_tb.value == case.destination_memory, f"Unexpected destination_memory for opcode {dut.opcode_tb.value}";  
         assert dut.destination_registers_tb.value == case.destination_registers, f"Unexpected destination_registers for opcode {dut.opcode_tb.value}";  
         assert dut.destination_ports_tb.value == case.destination_ports, f"Unexpected destination_ports for opcode {dut.opcode_tb.value}";  
+
+        assert dut.destination_index_tb.value == case.destination_index, f"Unexpected destination_index for opcode {dut.opcode_tb.value}"; 
+        assert dut.ram_operand_tb.value == case.ram_operand, f"Unexpected ram_operand for opcode {dut.opcode_tb.value}"; 
+        assert dut.duplicate_w_tb.value == case.duplicate_w, f"Unexpected duplicate_w for opcode {dut.opcode_tb.value}"; 
