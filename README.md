@@ -25,6 +25,11 @@ Implements the microcode that can be used for a CPU implementation, intended to 
 - **source_ports**: Indicates if the source of a movement operation to work register is a port
 - **source_registers**: Indicates if the source of a movement operation to work register is a register
 
+- **stack_operation**: Indicates if the operation involves using the stack
+- **stack_direction**: Indicates if the stack operation is Push (1) or Pop (0)
+- **destination_cpu_config**: Indicates if the destination of a movement operation is the CPU configuration
+- **destination_timers_config**: Indicates if the destination of a movement operation is the Timers configuration
+
 ## Operation:
 
 The microcode is active all the time, no enable signal is avaibale, on evety clock cycle the outputs will change according to the conditions given by the input values. The idea behind this is for the CPU to use the output signals as indication on how to perform actions during the instructions execution phase, a previous fectch phase to get opcode and operands must exist, maybe some later phases can be required.

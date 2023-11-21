@@ -13,6 +13,7 @@ module tb (
     input wire [7:0] w_tb,
     input wire carry_tb,
     input wire zero_tb,
+    input wire sign_tb,
     output wire alu_operation_tb,
     output wire alu_multibyte_result_tb,
     output wire jump_operation_tb,
@@ -27,7 +28,11 @@ module tb (
     output wire ram_operand_tb,
     output wire duplicate_w_tb,
     output wire source_ports_tb,
-    output wire source_registers_tb
+    output wire source_registers_tb,
+    output wire stack_operation_tb,
+    output wire stack_direction_tb, // 0 Pop, 1 Push
+	output wire destination_cpu_config_tb,
+	output wire destination_timer_config_tb
 );
 
     // instantiate the DUT
@@ -37,6 +42,7 @@ module tb (
         .w (w_tb),
         .carry (carry_tb),
         .zero (zero_tb),
+        .sign (sign_tb),
         .alu_operation (alu_operation_tb),
         .alu_multibyte_result (alu_multibyte_result_tb),
         .jump_operation (jump_operation_tb),
@@ -51,7 +57,11 @@ module tb (
         .ram_operand (ram_operand_tb),
         .duplicate_w (duplicate_w_tb),
         .source_ports (source_ports_tb),
-        .source_registers (source_registers_tb)
+        .source_registers (source_registers_tb),
+        .stack_operation (stack_operation_tb),
+        .stack_direction (stack_direction_tb),
+        .destination_cpu_config (destination_cpu_config_tb),
+        .destination_timer_config (destination_timer_config_tb)
     );
 
 endmodule

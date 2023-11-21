@@ -7,6 +7,7 @@ module ucode (
     input wire [7:0] w,
     input wire carry,
     input wire zero,
+    input wire sign,
     output wire alu_operation,
     output wire alu_multibyte_result,
     output wire jump_operation,
@@ -21,7 +22,11 @@ module ucode (
     output wire ram_operand,
     output wire duplicate_w,
     output wire source_ports,
-    output wire source_registers
+    output wire source_registers,
+    output wire stack_operation,
+    output wire stack_direction, // 0 Pop, 1 Push
+	output wire destination_cpu_config,
+	output wire destination_timer_config
 );
 
 	reg alu_op;
@@ -39,6 +44,10 @@ module ucode (
     reg dup_w;
     reg src_port;
     reg src_reg;
+    reg stack_op;
+    reg stack_dir;
+	reg dst_cpu_cfg;
+	reg dst_tmr_cfg;
 
     assign alu_operation = alu_op;
     assign alu_multibyte_result = alu_mb;
@@ -55,6 +64,10 @@ module ucode (
 	assign duplicate_w = dup_w;
     assign source_ports = src_port;
     assign source_registers = src_reg;
+    assign stack_operation = stack_op;
+    assign stack_direction = stack_dir;
+	assign destination_cpu_config = dst_cpu_cfg;
+	assign destination_timer_config = dst_tmr_cfg;
 
 	always @(posedge clk) begin
 		alu_op <= 0;
@@ -72,6 +85,10 @@ module ucode (
     	dup_w <= 0;
     	src_port <= 0;
     	src_reg <= 0;
+		stack_op <= 0;
+		stack_dir <= 0;
+		dst_cpu_cfg <= 0;
+		dst_tmr_cfg <= 0;
 
 		case (opcode)
 			// Instructions without operands
@@ -217,11 +234,18 @@ module ucode (
 			end
 			8'b0011_1100: begin
 			end
-			8'b0011_1101: begin
+
+			8'b0011_1101: begin // Ret
+				stack_op <= 1;
+				stack_dir <= 0;
 			end
-			8'b0011_1110: begin
+			8'b0011_1110: begin // CpuCfg
+				mov_op <= 1;
+				dst_cpu_cfg <= 1;
 			end
-			8'b0011_1111: begin
+			8'b0011_1111: begin // TmrCfg
+				mov_op <= 1;
+				dst_tmr_cfg <= 1;
 			end
 
 			8'b0100_0000: begin // MovWP0
@@ -648,15 +672,23 @@ module ucode (
 				jmp_op <= 1;
 				jmp_condition <= zero;
 			end
-			8'b1010_1000: begin // Call
+			8'b1010_1000: begin // JmpS
+				jmp_op <= 1;
+				jmp_condition <= sign;
 			end
-			8'b1010_1001: begin // Call
+			8'b1010_1001: begin // JmpS
+				jmp_op <= 1;
+				jmp_condition <= sign;
+			end
+			8'b1010_1010: begin // Call
+				stack_op <= 1;
+				stack_dir <= 1;
+			end
+			8'b1010_1011: begin // Call
+				stack_op <= 1;
+				stack_dir <= 1;
 			end
 
-			8'b1010_1010: begin
-			end
-			8'b1010_1011: begin
-			end
 			8'b1010_1100: begin
 			end
 			8'b1010_1101: begin

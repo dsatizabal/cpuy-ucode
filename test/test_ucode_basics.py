@@ -4,19 +4,19 @@ from cocotb.triggers import ClockCycles, Timer
 from .result import Result
 
 ## NOP
-obj0 = Result(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # NOP
+obj0 = Result(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # NOP
 
 # ALU Operations
-obj1 = Result(1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) # Dec
-obj2 = Result(2, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) # Inc
-obj3 = Result(3, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) # Not
-obj4 = Result(4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0) # SetC
-obj5 = Result(5, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0) # ClrC
-obj6 = Result(6, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) # RL
-obj7 = Result(7, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) # RR
-obj8 = Result(8, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) # RLC
-obj9 = Result(9, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) # RRC
-obj10 = Result(10, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) # Swap
+obj1 = Result(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # Dec
+obj2 = Result(2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # Inc
+obj3 = Result(3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # Not
+obj4 = Result(4, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # SetC
+obj5 = Result(5, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # ClrC
+obj6 = Result(6, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # RL
+obj7 = Result(7, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # RR
+obj8 = Result(8, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # RLC
+obj9 = Result(9, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # RRC
+obj10 = Result(10, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) # Swap
 
 cases = [obj0, obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8, obj9, obj10]
 
@@ -32,6 +32,7 @@ async def ucode_test(dut):
         dut.w_tb.value = case.w
         dut.carry_tb.value = case.carry
         dut.zero_tb.value = case.zero
+        dut.sign_tb.value = case.sign
 
         await ClockCycles(dut.clk_tb, 2)
         await Timer(10, units="ns");
@@ -53,3 +54,8 @@ async def ucode_test(dut):
 
         assert dut.source_ports_tb.value == case.source_ports, f"Unexpected source_ports for opcode {dut.opcode_tb.value}"; 
         assert dut.source_registers_tb.value == case.source_registers, f"Unexpected source_registers for opcode {dut.opcode_tb.value}"; 
+
+        assert dut.stack_operation_tb.value == case.stack_operation, f"Unexpected stack_operation for opcode {dut.opcode_tb.value}"; 
+        assert dut.stack_direction_tb.value == case.stack_direction, f"Unexpected stack_direction for opcode {dut.opcode_tb.value}"; 
+        assert dut.destination_cpu_config_tb.value == case.destination_cpu_config, f"Unexpected destination_cpu_config for opcode {dut.opcode_tb.value}"; 
+        assert dut.destination_timer_config_tb.value == case.destination_timer_config, f"Unexpected destination_timer_config for opcode {dut.opcode_tb.value}";

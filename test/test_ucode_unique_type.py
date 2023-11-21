@@ -19,4 +19,4 @@ async def ucode_test(dut):
         await ClockCycles(dut.clk_tb, 2)
         await Timer(10, units="ns");
 
-        assert dut.alu_operation_tb.value + dut.jump_operation_tb.value + dut.mov_operation_tb.value <= 1, f"Unexpected mutitype operation: opcode {dut.opcode_tb.value}, alU {dut.alu_operation_tb.value}, mov {dut.jump_operation_tb.value}, mov {dut.mov_operation_tb.value}";  
+        assert dut.alu_operation_tb.value + dut.jump_operation_tb.value + dut.mov_operation_tb.value + dut.stack_operation_tb.value <= 1, f"Unexpected mutitype operation: opcode {dut.opcode_tb.value}, alU {dut.alu_operation_tb.value}, jmp {dut.jump_operation_tb.value}, mov {dut.mov_operation_tb.value}, stack {dut.stack_operation_tb.value}";  
