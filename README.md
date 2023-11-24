@@ -4,7 +4,6 @@ Implements the microcode that can be used for a CPU implementation, intended to 
 
 ## Inputs and Outputs description:
 
-- **clk**:  input of CPU clock
 - **opcode**: Opcode of the current operation (without any pre processing)
 - **w**: Value of Work register
 - **carry**: Value of CPU carry flag
@@ -32,7 +31,7 @@ Implements the microcode that can be used for a CPU implementation, intended to 
 
 ## Operation:
 
-The microcode is active all the time, no enable signal is avaibale, on evety clock cycle the outputs will change according to the conditions given by the input values. The idea behind this is for the CPU to use the output signals as indication on how to perform actions during the instructions execution phase, a previous fectch phase to get opcode and operands must exist, maybe some later phases can be required.
+The microcode is active all the time, it is a combinational logic circuit that required no clock, the outputs will change according to the conditions given by the input values. The idea behind this is for the CPU to use the output signals as indication on how to perform actions during the instructions execution phase, a previous fectch phase to get opcode and operands must exist, maybe some later phases can be required.
 
 **Observe** that, as per 19 Nov 2023, all possible combinations of Opcodes are declared but not used this is likely to be removed, some other (particularly the ones starting by 1 in the MSB) have duplicate opcodes, this is because the LSB is used to indicate the number of operands that these instructions must fetch, in some cases this is not required and likely opcodes can be reused in the future.
 

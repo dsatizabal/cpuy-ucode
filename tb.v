@@ -8,7 +8,6 @@ that can be driven / tested by the cocotb test.py
 
 module tb (
     // testbench is controlled by test/test_*.py files
-    input wire clk_tb,
     input wire [7:0] opcode_tb,
     input wire [7:0] w_tb,
     input wire carry_tb,
@@ -24,7 +23,7 @@ module tb (
     output wire destination_memory_tb,
     output wire destination_registers_tb,
     output wire destination_ports_tb,
-    output reg [2:0] destination_index_tb,
+    output wire [2:0] destination_index_tb,
     output wire ram_operand_tb,
     output wire duplicate_w_tb,
     output wire source_ports_tb,
@@ -37,7 +36,6 @@ module tb (
 
     // instantiate the DUT
     ucode ucode(
-        .clk (clk_tb),
         .opcode (opcode_tb),
         .w (w_tb),
         .carry (carry_tb),

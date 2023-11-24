@@ -1,6 +1,5 @@
 import cocotb
-from cocotb.clock import Clock
-from cocotb.triggers import ClockCycles, Timer
+from cocotb.triggers import ReadWrite, Timer
 from .result import Result
 
 ## NOP
@@ -22,11 +21,6 @@ cases = [obj0, obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8, obj9, obj10]
 
 @cocotb.test()
 async def ucode_test(dut):
-    clock = Clock(dut.clk_tb, 10, "us")
-    cocotb.fork(clock.start())
-
-    await ClockCycles(dut.clk_tb, 2)
-
     for case in cases:
         dut.opcode_tb.value = case.opcode
         dut.w_tb.value = case.w
@@ -34,7 +28,7 @@ async def ucode_test(dut):
         dut.zero_tb.value = case.zero
         dut.sign_tb.value = case.sign
 
-        await ClockCycles(dut.clk_tb, 2)
+        await ReadWrite()
         await Timer(10, units="ns");
 
         assert dut.alu_operation_tb.value == case.alu_operation, f"Unexpected alu_operation for opcode {dut.opcode_tb.value}";  
