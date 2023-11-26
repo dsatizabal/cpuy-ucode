@@ -28,6 +28,7 @@ Implements the microcode that can be used for a CPU implementation, intended to 
 - **stack_direction**: Indicates if the stack operation is Push (1) or Pop (0)
 - **destination_cpu_config**: Indicates if the destination of a movement operation is the CPU configuration
 - **destination_timers_config**: Indicates if the destination of a movement operation is the Timers configuration
+- **source_operands**: Indicates if the source of a movement operation is an operand
 
 ## Operation:
 

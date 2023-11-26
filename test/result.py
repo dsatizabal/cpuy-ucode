@@ -1,5 +1,5 @@
 class Result:
-    def __init__(self, opcode, w, carry, zero, sign, alu_operation, alu_multibyte_result, jump_operation, jump_condition, mov_operation, destination_w, destination_flags, destination_memory, destination_registers, destination_ports, destination_index, ram_operand, duplicate_w, source_ports, source_registers, stack_operation, stack_direction, destination_cpu_config, destination_timer_config):
+    def __init__(self, opcode, w, carry, zero, sign, alu_operation, alu_multibyte_result, jump_operation, jump_condition, mov_operation, destination_w, destination_flags, destination_memory, destination_registers, destination_ports, destination_index, ram_operand, duplicate_w, source_ports, source_registers, stack_operation, stack_direction, destination_cpu_config, destination_timer_config, source_operands):
         self.opcode = opcode
         self.w = w
         self.carry = carry
@@ -24,3 +24,4 @@ class Result:
         self.stack_direction = stack_direction
         self.destination_cpu_config = destination_cpu_config
         self.destination_timer_config = destination_timer_config
+        self.source_operands = source_operands

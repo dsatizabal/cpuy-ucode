@@ -31,7 +31,8 @@ module tb (
     output wire stack_operation_tb,
     output wire stack_direction_tb, // 0 Pop, 1 Push
 	output wire destination_cpu_config_tb,
-	output wire destination_timer_config_tb
+	output wire destination_timer_config_tb,
+	output wire source_operands_tb
 );
 
     // instantiate the DUT
@@ -59,7 +60,8 @@ module tb (
         .stack_operation (stack_operation_tb),
         .stack_direction (stack_direction_tb),
         .destination_cpu_config (destination_cpu_config_tb),
-        .destination_timer_config (destination_timer_config_tb)
+        .destination_timer_config (destination_timer_config_tb),
+        .source_operands (source_operands_tb)
     );
 
 endmodule
